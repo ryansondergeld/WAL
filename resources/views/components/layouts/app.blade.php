@@ -6,7 +6,6 @@
 
         <title>{{ $title ?? 'Winners and Losers' }}</title>
         @livewireStyles
-        @vite('resources/css/app.css')
     </head>
     <body background="bg.jpg">
     <div class="flex flex-col border border-black justify-center items-center h-screen w-screen">
