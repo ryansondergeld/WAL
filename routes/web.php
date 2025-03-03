@@ -6,4 +6,4 @@ use Illuminate\Support\Facades\Route;
 
 # livewire Route
 Route::get('/WinnersAndLosers', WinnersAndLosers::class);
-Route::any('/', WinnersAndLosers::class);
+Route::get('/', WinnersAndLosers::class);
