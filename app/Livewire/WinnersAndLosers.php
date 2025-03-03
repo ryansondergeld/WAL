@@ -8,7 +8,7 @@ use Illuminate\Foundation\Application;
 use Livewire\Component;
 use Random\RandomException;
 
-class Home extends Component
+class WinnersAndLosers extends Component
 {
     public string $board = '';
     public int $state = 0;

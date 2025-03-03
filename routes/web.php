@@ -1,9 +1,9 @@
 <?php
 
-use App\Livewire\Home;
+use App\Livewire\WinnersAndLosers;
 use Illuminate\Support\Facades\Route;
 
 
 # livewire Route
-Route::get('/Home', Home::class);
-Route::any('/', Home::class);
+Route::get('/WinnersAndLosers', WinnersAndLosers::class);
+Route::any('/', WinnersAndLosers::class);
