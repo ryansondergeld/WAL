@@ -28,7 +28,7 @@ class WinnersAndLosers extends Component
     public function render(): View|Factory|Application
     {
         # Show the view
-        return view('livewire.home');
+        return view('livewire.winnersandlosers');
     }
 
     /**
