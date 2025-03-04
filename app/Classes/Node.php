@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Classes;
 class Node
 {
     public string $value;

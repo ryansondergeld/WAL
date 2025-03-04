@@ -7,7 +7,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Livewire\Component;
 use Random\RandomException;
-use App\Classes\WinnersAndLosers\Node;
+use App\Classes\Node;
 
 class WinnersAndLosers extends Component
 {
