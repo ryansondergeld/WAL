@@ -67,6 +67,20 @@ Once again, since we have only two possiblities ('W' and 'L') we can treat this 
 
 We can see that this table represents an OR gate.  If we take A OR B we get the result.  This means the person who doesn't have the second-to-last turn will want to use this truth table every time in order to try and win.
 
+### Predicting who will win
+
+In order to predict who will win at the end of a very large string, we can use the information about how each player can play above.  Here is a summary of what we know:
+- If the string is even, 1P will pick second-to-last
+- If the string is odd, 2P will pick second-to-last
+- Whomever picks second-to-last will always AND the two choices
+- The other player will always OR the two choices
+
+Using this information, we can simulate and create a list of possible results.
+
+#### Three choice Results
+
+Let's look at an example of the choces presented for a string 3 characters long:
+
 
 
 
