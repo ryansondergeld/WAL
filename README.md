@@ -41,7 +41,7 @@ The only condition where P2 can possibly win the game is if the strings are all 
 |0|0|0|1P    |
 |0|1|0|1P    |
 |1|0|0|1P    |
-|1|1|0|2P    |
+|1|1|1|2P    |
 
 By looking at it in this manner, the table is the same representation as an AND gate.  That is, if we take A AND B we get the result. This means that the person who has the second to last turn will want to use this truth table to win every single time unless the final two letters are both 'W'.
 
@@ -55,3 +55,18 @@ The player who doesn't go second-to-last wants to get as many 'W's in the string
 |L|W|W|
 |W|L|W|
 |W|W|W|
+
+Once again, since we have only two possiblities ('W' and 'L') we can treat this as a binary truth table where 'W' = 1 and 'L' = 0.
+
+|A|B|Q|
+|-|-|-|
+|0|0|0|
+|0|1|1|
+|1|0|1|
+|1|1|1|
+
+We can see that this table represents an OR gate.  If we take A OR B we get the result.  This means the person who doesn't have the second-to-last turn will want to use this truth table every time in order to try and win.
+
+
+
+
