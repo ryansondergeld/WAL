@@ -15,6 +15,26 @@ For the remainder of this readme, the following will be used:
 - 2P will refer to the player who takes the last turn
 
 ## CPU Theory
+In any given game, the length of the string will determine which player has the last turn.
+- If the string is even, the second player (2P) will pull the last tile
+- If the string is odd, the first player (1P) will pull the last tile
+
+Because of this condition, it is most important to look at who will take the penultimate turn (next-to-last). This player in this particular position decides the entire game.  Since there are only two letters at this point we have a simple truth table we can create:
+
+- A represents the letter to the left
+- B represents the letter to the right
+- Q represents the letter than 1P picks
+- Winner represents who will win the game
+
+| | |Q|Winner|
+|-|-|-|------|
+|L|L|L|1P    |
+|L|W|L|1P    |
+|W|L|L|1P    |
+|W|W|L|1P    |
+
+
+
 
 ### 
 
