@@ -1,3 +1,24 @@
+
+# Winners And Losers
+
+## How To Play
+- There will be a string of 5-50 random 'L' and 'W' letters created when the game starts
+- Each player takes turns removing one letter from the left of the string or the right of the string
+- The game continues until the last letter is removed
+- If the last letter is a 'W' the player who takes it wins
+- If the last letter is a 'L' the player who takes it loses
+
+## Definitions
+
+For the remainder of this readme, the following will be used:
+- 1P will refer to the player who takes the first turn
+- 2P will refer to the player who takes the last turn
+
+## CPU Theory
+
+### 
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
