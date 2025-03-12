@@ -20,9 +20,7 @@ For the remainder of this readme, the following will be used:
 - 'W' can be represented as a value of 1
 - 'L' can be represented as a value of 0
 
-## CPU Theory
-
-### Who goes last?
+## Who goes last?
 In any given game, the length of the string will determine which player has the last turn.
 - If the string length is even, the second player (2P) will pull the last tile
 - If the string length is odd, the first player (1P) will pull the last tile
@@ -69,7 +67,7 @@ Once again, since we have only two possiblities ('W' and 'L') we can treat this 
 
 We can see that this table represents an <a href="https://en.wikipedia.org/wiki/OR_gate">OR</A> gate.  Since the player in this position always wants the 'W' we can use an OR statement to determine whether the player in this position will win or lose.
 
-### Showing all possibilities
+## Showing all possibilities
 For the folowing images, we will show what the string will look like if we take the left or right character off.  To make the positions of the characters clear, we will substitute letters of the alphabet for each position.  For example in the string 'WLL' would be represented as ABC.  Even though each value can only be a 1 (W) or 0 (L) I want to make it clear where each position in the string ends as we make our decisions.
 
 In order to show all of the paths, we will move down a tree of values starting with the full string at the top and remove the left character or the right character as we move down the tree.  Using the same three letter string 'ABC', if we remote the left character as removed the remaining letters are 'BC'.  If we remove the right character the remaining letters are 'AB'.  We can continue this process and create the following tree of all possible paths using this size string:
@@ -91,7 +89,7 @@ However, the theory behind this is sound and it would indeed give the proper res
 - Whomever picks second-to-last will always AND the two choices (shooting for the lowest or minimum value L)
 - The other player will always OR the two choices (shooting for the highest or maximum value W)
 
-### Optimizing our Solution
+## Optimizing our Solution
 
 If we look at our trees again, we can see that once we chose either left or right on the first turn, the center of either choice is exactly the same.  Since they will logically look at the exact same characters of the string, we can significantly trim our tree down in the following manner:
 
@@ -133,7 +131,7 @@ Final destination: LLWLW (this goes into array 0)
 
 We can see from this process that there is no path to get a 'W' to the final string. Since the string length is even, we know that 1P will go second-to-last and will win.
 
-### Tracking our progress as we go
+## Tracking our progress as we go
 
 We can now use this array of strings as a map for the game to determine the winner.  We can create an X and Y value to tell which turn we are at (Y) and where in the string we are (X).
 Initially, the values are set as follows:
