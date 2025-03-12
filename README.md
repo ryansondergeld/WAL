@@ -45,7 +45,7 @@ The only condition where 2P can possibly win the game is if the strings are all 
 |1|0|0|1P    |
 |1|1|1|2P    |
 
-When seen in this manner, the table is the same representation as an <a href="https://en.wikipedia.org/wiki/AND_gate">AND</a> gate.  That is, if we take A AND B we get the result. This means that the person who has the second to last turn will want to use this truth table to win every single time unless the final two letters are both 'W'.
+When seen in this manner, the table is the same representation as an <a href="https://en.wikipedia.org/wiki/AND_gate">AND</a> gate.  This player always wants to leave an 'L' for the last player so they will always pick the 'L' or zero value.  This means that if we want to code the best possible logic for this player, we can use an AND statement to determine whether the player in this position will win or lose. 
 
 ### The other player
 
@@ -67,22 +67,12 @@ Once again, since we have only two possiblities ('W' and 'L') we can treat this 
 |1|0|1|
 |1|1|1|
 
-We can see that this table represents an OR gate.  If we take A OR B we get the result.  This means the person who doesn't have the second-to-last turn will want to use this truth table every time in order to try and win.
+We can see that this table represents an <a href="https://en.wikipedia.org/wiki/OR_gate">OR</A> gate.  Since the player in this position always wants the 'W' we can use an OR statement to determine whether the player in this position will win or lose.
 
-### Predicting who will win
+### Showing all possibilities
+For the folowing images, we will show what the string will look like if we take the left or right character off.  To make the positions of the characters clear, we will substitute letters of the alphabet for each position.  For example in the string 'WLL' would be represented as ABC.  Even though each value can only be a 1 (W) or 0 (L) I want to make it clear where each position in the string ends as we make our decisions.
 
-In order to predict who will win at the end of a very large string, we can use the information about how each player can play above.  Here is a summary of what we know:
-- If the string is even, 1P will pick second-to-last
-- If the string is odd, 2P will pick second-to-last
-- Whomever picks second-to-last will always AND the two choices
-- The other player will always OR the two choices
-
-Using this information, we can simulate and create a list of possible results.
-
-#### Showing all possibilities
-For the folowing images, we will show what the string will look like if we take the left or right character off.  To make the positions of the characters clear, we will substitute letters of the alphabet for each position.  For example in the string 'WLL' would be represented as ABC.  
-
-In order to show all of the paths, we will move down a tree and remove the left character or the right character.  Using the same three letter string 'ABC', if we remote the left character the remaining letters are 'BC'.  If we remove the right character the remaining letters are 'AB'.  We can continue this process and create a tree of all possible paths using this size string:
+In order to show all of the paths, we will move down a tree of values starting with the full string at the top and remove the left character or the right character as we move down the tree.  Using the same three letter string 'ABC', if we remote the left character as removed the remaining letters are 'BC'.  If we remove the right character the remaining letters are 'AB'.  We can continue this process and create the following tree of all possible paths using this size string:
 
 ![tree-3a](https://github.com/user-attachments/assets/ec9b24c1-2e19-4b94-bfc7-4b35b14a9338)
 
@@ -90,19 +80,28 @@ Likewise, we can do the same with a 4 character string:
 
 ![tree-4a](https://github.com/user-attachments/assets/8a6ab197-ad23-49c2-aaed-a328fca7cd0c)
 
-Using this idea, we could create a series of nodes and use a recursive formula to plot all possible moves.  The recursive formula would move all the way down the left side of the tree, then work its way back up and fill in the right branches.  We can give each node a value based on picking the 'L' or 'W' and have a linked list that we could traverse to see every possiblity of the game.  The problem with this solution is that it will take too much computation time for very large strings.  The number of computations required would be 2^(n-1) + 1.  
+After visualizing this, my first tought was to create a series of nodes and use a recursive formula to plot all possible moves.  The recursive formula would move all the way down the left side of the tree, then work its way back up and fill in the right branches while evaluating a value at each decision point as listed previously.  This would create a linked list that could be traversed to see every possible outcome of the game.  The problem with this solution is that it will take an excemptional amount of computation time for a very large string.  The number of calls to our recursive formula could be represented as the formula 2^(n-1) + 1.  
 
-This means as we approach string sizes of 24, for example, we would require 8,388,609 calls to our recursive function.  The limit at 55 characters would take 18,014,398,510,000,001 calls to our recursive function.  Even if we were to prune our data, there is still a chance that an obscene number of function calls could happen, and we don't want that kind of performace.  (On the web page, this results in a PHP timeout error which gives a blank white page)
+This means as we approach a string size of 24, for example, we would require 8,388,609 calls to our recursive function.  The limit at 55 characters would take 18,014,398,510,000,001 calls to our recursive function.  Even if we were to prune our data, there is still a chance that an excessive number of function calls could happen, and I don't want to take the chance that a random string will cause the game to freeze. (On the web page, this results in a PHP timeout error which gives a blank white page)
 
-#### A Solution
+However, the theory behind this is sound and it would indeed give the proper result.  We could determine the values of each node dpeending on whether the length is even or odd.  For nodes that have only a single letter, we just reutrn the value of the letter 'W' (1) or 'L' (0).  This would create a tree that can predict which player will win in the end and provide us with the exact path to victory using the following information:
 
-If we look at our maps again, we can see that once we chose either left or right on the first turn, the center of either choice is exactly the same.  Since they will logically look at the exact same characters of the string, we can significantly trim our tree down in the following manner:
+- If the string is even, 1P will pick second-to-last
+- If the string is odd, 2P will pick second-to-last
+- Whomever picks second-to-last will always AND the two choices (shooting for the lowest or minimum value L)
+- The other player will always OR the two choices (shooting for the highest or maximum value W)
+
+### Optimizing our Solution
+
+If we look at our trees again, we can see that once we chose either left or right on the first turn, the center of either choice is exactly the same.  Since they will logically look at the exact same characters of the string, we can significantly trim our tree down in the following manner:
 
 ![tree-3b](https://github.com/user-attachments/assets/d22833a0-1876-4a19-bb1a-525b9cf3f61f)
 
 When we continue up to a 4 character tree we see the same happens and the tree can be trimmed to look like this:
 
 ![tree-4b](https://github.com/user-attachments/assets/afad22c1-4c05-4ce3-9305-b13aa02cfea4)
+
+This has significantly trimmed our tree of nodes down to a very managable size.
 
 Now, one very noticable pattern appears: the final paths always lead to a reversed version of the initial string.
 
@@ -120,8 +119,8 @@ So, our process breaks down as this:
 - OR all of the values in the previous string into a new string
 - Repeat the last two steps until we are down to a single character
 
-If that final character is a 'W' and the initial string length is 1, there is no path for 1P to win and 2P will be the winner
-If that final character is a 'L' and the initial string length is even, there is no path for 2P to win and 1P will be the winner
+If that final character is a 'W' and the initial string length is 1, there is no path for 1P to win and 2P will be the winner.  Otherwise 1P will win.
+If that final character is a 'L' and the initial string length is even, there is no path for 2P to win and 1P will be the winner.  Otherwise 2P will win.
 
 An example string tree where 'L' = 0 and 'W' = 1 might look like this:
 Initial string: WLWLL
@@ -133,6 +132,8 @@ Final destination: LLWLW (this goes into array 0)
 - Array [4] L         (OR each pair of digits)
 
 We can see from this process that there is no path to get a 'W' to the final string. Since the string length is even, we know that 1P will go second-to-last and will win.
+
+### Tracking our progress as we go
 
 We can now use this array of strings as a map for the game to determine the winner.  We can create an X and Y value to tell which turn we are at (Y) and where in the string we are (X).
 Initially, the values are set as Y = string length (4) and X = 0
