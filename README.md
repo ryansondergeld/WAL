@@ -45,7 +45,7 @@ The only condition where 2P can possibly win the game is if the strings are all 
 
 When seen in this manner, the table is the same representation as an <a href="https://en.wikipedia.org/wiki/AND_gate">AND</a> gate.  This player always wants to leave an 'L' for the last player so they will always pick the 'L' or zero value.  This means that if we want to code the best possible logic for this player, we can use an AND statement to determine whether the player in this position will win or lose. 
 
-### The other player
+## The other player
 
 The player who doesn't go second-to-last wants to get as many 'W's in the string as possible in order to try and achieve the pair of 'W's at the second-to-last turn.  This means that when given a choice between a 'W' or 'L' this player will always want to pick the 'W'.  The only case they would pick the 'L' is if both choices were 'L'.  We can represent this as a truth table below:
 
