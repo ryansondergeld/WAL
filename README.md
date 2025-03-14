@@ -131,9 +131,11 @@ Final destination: LLWLW (this goes into array 0)
 
 We can see from this process that there is no path to get a 'W' to the final string. Since the string length is even, we know that 1P will go second-to-last and will win.
 
-## Tracking our progress as we go
+## Best moves turn-by-turn
 
-We can now use this array of strings as a map for the game to determine the winner.  We can create an X and Y value to tell which turn we are at (Y) and where in the string we are (X).
+Our code has been optimized enough that it would be possible to call our function on each choice - left or right - and make a decision based on that outcome.  However, since we already generate the entire decision process on the first string, the information is already present for every move that could be made in the game.
+
+By simply creating an X and Y value to traverse the array of strings, we can determine a value for each spot and simply check the next two values.  The (Y) Value would represent the current turn from top-to-bottom while the X value represents which branch we are at from left-to-right.
 Initially, the values are set as follows:
 - Y = string length (4)
 - X = 0
