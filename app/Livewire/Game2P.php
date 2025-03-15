@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Random\RandomException;
 
 class Game2P extends Component
 {
@@ -10,6 +11,9 @@ class Game2P extends Component
     public int $state = 0;
     public string $player = 'Player 1';
 
+    /**
+     * @throws RandomException
+     */
     public function mount(): void
     {
         $this->generate_board();
@@ -19,16 +23,18 @@ class Game2P extends Component
         return view('livewire.game2-p');
     }
 
-    private function best()
-    {
-        # Start by
-    }
-
+    /**
+     * @throws RandomException
+     */
     private function generate_board() : void
     {
         # Declare variables
         $r = '';
+
+        # Get a random length
         $l = random_int(5, 50);
+
+        # Set the allowable characters
         $c = 'WL';
 
         # Create our String

@@ -2,12 +2,9 @@
     <div class="flex justify-center items-center w-full h-1/8">
         <H1 class="text-2xl">Winners and Losers</H1>
     </div>
-    <div class="flex flex-col justify-center items-center break-all w-full h-3/4">
-        <div class="h-1/8">
-            <p>Test Mode</p>
-        </div>
+    <div class="flex flex-col justify-start items-center break-all w-full h-3/4">
         <div class="w-full flex flex-col justify-start break-normal h-3/4 px-4 py-2">
-            <p class="w-64 justify-center">Enter a test string below and click test to see the outcomes</p>
+            <p class="w-full flex justify-center">Enter a string of 'W' and 'L' below and click Test String to see how the game will play out.</p>
             <p class="text-sm text-red-500">{{$errors}}</p>
             <div class="flex justify-center w-full py-2">
                 <input type="text" wire:model="input" class="border border-slate-300 py-2 px-4 h-12 w-64"></input>

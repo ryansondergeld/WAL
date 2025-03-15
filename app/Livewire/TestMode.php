@@ -15,10 +15,6 @@ class TestMode extends Component
     public array $moves = [];
     public CPU $CPU;
 
-    public function mount(): void
-    {
-
-    }
     public function render(): object
     {
         return view('livewire.test-mode');

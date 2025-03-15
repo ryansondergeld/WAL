@@ -9,14 +9,14 @@ class CPU implements Wireable
     private array $moves = [];
     private array $tree = [];
     private string $board;
-    private int $turn;
+    private int $level;
     private int $branch;
 
     public function __construct($board)
     {
         $this->board = $board;
         $this->build_tree();
-        $this->turn = 0;
+        $this->level = strlen($this->board)-1;
         $this->branch = 0;
         $this->build_moves();
     }
@@ -136,13 +136,7 @@ class CPU implements Wireable
         return $r;
     }
 
-    function get_output() : array
-    {
-        # Create a generic array, I guess
-        return $this->moves;
-    }
-
-    function get_moves()
+    function get_moves(): array
     {
         return $this->moves;
     }
@@ -162,14 +156,14 @@ class CPU implements Wireable
     function move_left() : void
     {
         # Branch stays the same, level increments
-        $this->turn = $this->turn + 1;
+        $this->level = $this->level - 1;
     }
 
     function move_right() : void
     {
         # Branch and level increment
         $this->branch = $this->branch + 1;
-        $this->turn = $this->turn + 1;
+        $this->level = $this->level - 1;
     }
 
     public function best_move($branch, $level) : string
@@ -196,7 +190,7 @@ class CPU implements Wireable
         $l = strlen($this->board);
 
         # Get the current condition
-        $v = $this->tree[$this->turn][$this->branch];
+        $v = $this->tree[$this->level][$this->branch];
 
         # Set 1P as default return value
         $r = '1P';
@@ -207,21 +201,26 @@ class CPU implements Wireable
         # If Odd and L, 2P Wins
         if($l % 2 != 0 and $v == 'L') { $r = '2P';}
 
+        #dd($this->tree, $this->level, $this->branch, $r);
+
         # return our value
         return $r;
     }
 
-    public function toLivewire()
+    public function toLivewire(): array
     {
         return
         [
-            'turn' => $this->turn,
+            'level' => $this->level,
             'board' => $this->board,
             'branch' => $this->branch,
             'moves' => $this->moves,
             'tree' => $this->tree,
         ];
     }
+
+    public function get_branch(): int { return $this->branch;}
+    public function get_level(): int { return $this->level;}
 
     public static function fromLivewire($value)
     {
