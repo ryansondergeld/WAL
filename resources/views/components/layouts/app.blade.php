@@ -6,7 +6,7 @@
 
         <title>{{ $title ?? 'Winners and Losers' }}</title>
         @livewireStyles
-        <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+        <link href="/css/app.css" rel="stylesheet">
     </head>
     <body background="bg.jpg">
     <div class="flex flex-col border border-black justify-center items-center h-screen w-screen">

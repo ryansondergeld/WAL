@@ -67,8 +67,6 @@ class WinnersAndLosers extends Component
         if ($l % 2 == 0) {$t = 'min';}
 
         # Create a node
-        $this->ai = new Node($this->board, $t);
-        $this->ai->build_tree;
         /*
         # Resolve the game tree
         $value = $this->resolve($n);
