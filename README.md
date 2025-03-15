@@ -1,6 +1,17 @@
 
 # Winners And Losers
 
+## Program Requirements
+- [ ] A random string generator
+- [ ] A way to play the game against CPU
+- [ ] CPU is able to play the game 'perfectly'
+- [ ] Display and determine who is projected to win the game dependent on the string that is produced.  (Note: can change depending on the moves made by the player)
+- [ ] Simulation of the application
+    - [ ] A way to run the program multiple times in a row with different strings
+    - [ ] Simulation should have the AI play itself
+    - [ ] Prove the rules you created will result in an outcome predicted by AI
+    - [ ] Show results of the simulation
+
 ## How To Play
 - There will be a string of 5-50 random 'L' and 'W' letters created when the game starts
 - Each player takes turns removing one letter from the left of the string or the right of the string
