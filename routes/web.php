@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Countdown;
 use App\Livewire\Game1P;
 use App\Livewire\Game2P;
 use App\Livewire\Home;
@@ -17,3 +18,4 @@ Route::get('/Game1P', Game1P::class);
 Route::get('/Game2P', Game2P::class);
 Route::get('/TestMode', TestMode::class);
 Route::get('/', Home::class);
+Route::get('/Countdown', Countdown::class);

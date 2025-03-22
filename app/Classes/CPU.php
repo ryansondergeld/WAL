@@ -221,9 +221,16 @@ class CPU implements Wireable
 
     public function get_branch(): int { return $this->branch;}
     public function get_level(): int { return $this->level;}
+    public function get_tree(): array { return $this->tree;}
 
-    public static function fromLivewire($value)
+    public static function fromLivewire($value): static
     {
-        // TODO: Implement fromLivewire() method.
+        $level = $value['level'];
+        $board = $value['board'];
+        $branch = $value['branch'];
+        $moves = $value['moves'];
+        $tree = $value['tree'];
+
+        return new static($board);
     }
 }

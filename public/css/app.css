@@ -1054,6 +1054,12 @@
     width: calc(var(--spacing) * 64);
     background-color: var(--color-slate-100);
   }
+  .test-button {
+    border-radius: 0.25rem;
+    background-color: var(--color-blue-200);
+    padding-inline: calc(var(--spacing) * 4);
+    padding-block: calc(var(--spacing) * 2);
+  }
 }
 @property --tw-translate-x {
   syntax: "*";
