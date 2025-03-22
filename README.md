@@ -158,7 +158,16 @@ We can now track who should win for any player at any point of the game and whet
 
 For the CPU to make a decision, we simply look at the next string (Y-1) and compare the left (X) and right (X+1) positions.  Depending on if the string is even or odd, we either want the 'L' (0) or 'W' (1).  By tracking the decisions made throguh the game, we can tell which player will win at any point.
 
-
+# To-Do List
+- [x] Fix double-clicks on 1P game
+- [x] Flip a coin on 1P game - make CPU go first sometimes
+- [ ] Update 1P game to say CPU or Player is the winner
+- [ ] Add prediction and best move calculation to 2P game
+- [ ] Replace most HTML with tailwind components
+- [ ] Clean up 1P Code
+- [ ] Clean up 2P Code
+- [ ] Clean Up How To Play Code
+- [ ] Clean Up Simulation Code
 
 
 
