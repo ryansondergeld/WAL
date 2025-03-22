@@ -160,7 +160,8 @@ For the CPU to make a decision, we simply look at the next string (Y-1) and comp
 
 # To-Do List
 - [x] Fix double-clicks on 1P game
-- [ ] Flip a coin on 1P game - make CPU go first sometimes
+- [x] Flip a coin on 1P game - make CPU go first sometimes
+- [ ] Update 1P game to say CPU or Player is the winner
 - [ ] Add prediction and best move calculation to 2P game
 - [ ] Replace most HTML with tailwind components
 - [ ] Clean up 1P Code
