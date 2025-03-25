@@ -2,15 +2,15 @@
 # Winners And Losers
 
 ## Program Requirements
-- [ ] A random string generator
-- [ ] A way to play the game against CPU
-- [ ] CPU is able to play the game 'perfectly'
-- [ ] Display and determine who is projected to win the game dependent on the string that is produced.  (Note: can change depending on the moves made by the player)
-- [ ] Simulation of the application
-    - [ ] A way to run the program multiple times in a row with different strings
-    - [ ] Simulation should have the AI play itself
-    - [ ] Prove the rules you created will result in an outcome predicted by AI
-    - [ ] Show results of the simulation
+- [x] A random string generator
+- [x] A way to play the game against CPU
+- [x] CPU is able to play the game 'perfectly'
+- [x] Display and determine who is projected to win the game dependent on the string that is produced.  (Note: can change depending on the moves made by the player)
+- [x] Simulation of the application
+    - [x] A way to run the program multiple times in a row with different strings
+    - [x] Simulation should have the AI play itself
+    - [x] Prove the rules you created will result in an outcome predicted by AI
+    - [x] Show results of the simulation
 
 ## How To Play
 - There will be a string of 5-50 random 'L' and 'W' letters created when the game starts
@@ -45,43 +45,34 @@ Because of this condition, it is most important to look at who will take the pen
 |W|L|L|1P    |
 |W|W|W|2P    |
 
-The only condition where 2P can possibly win the game is if the strings are all 'W'.  Because we only have two possibilities: 'W' and 'L' we can treat this as a normal binary truth table where 'W' = 1 and 'L' = 0.
+ 1P will always want to pick the letter 'W' to leave 2P with an 'L' and win the game.  The only condition 2P wins the game is when both letters are 'W' and 1P still has to select a 'W'.  
 
-|A|B|Q|Winner|
-|-|-|-|------|
-|0|0|0|1P    |
-|0|1|0|1P    |
-|1|0|0|1P    |
-|1|1|1|2P    |
+ If we add an additional letter to the string, then 2P ends up picking second-to-last and will be in the same situation listed above.  1P will want to create a condition where the letters sent to 2P will both be 'W' since that is the only way he can win.  We can once again use a truth table below:
 
-When seen in this manner, the table is the same representation as an <a href="https://en.wikipedia.org/wiki/AND_gate">AND</a> gate.  This player always wants to leave an 'L' for the last player so they will always pick the 'L' or zero value.  This means that if we want to code the best possible logic for this player, we can use an AND statement to determine whether the player in this position will win or lose. 
+ |A|B|C|Next String|
+ |-|-|-|-----------|
+ |L|L|L|Leaves LL  |
+ |L|L|W|Leaves LW  |
+ |L|W|L|Leaves LW  |
+ |L|W|W|Leaves WW  |
+ |W|L|L|Leaves WL  |
+ |W|L|W|Leaves WL  |
+ |W|W|L|Leaves WW  |
+ |W|W|W|Leaves WW  |
 
-## The other player
+ As we can see, there are 3 out of 8 cases where we can possibly win.  In each case, 1P will always want to take the 'L' and leave as many 'W' in the next string as possible.
 
-The player who doesn't go second-to-last wants to get as many 'W's in the string as possible in order to try and achieve the pair of 'W's at the second-to-last turn.  This means that when given a choice between a 'W' or 'L' this player will always want to pick the 'W'.  The only case they would pick the 'L' is if both choices were 'L'.  We can represent this as a truth table below:
+ It seems that the most basic way for each player to make the best choice is as follows:
+ - If you are picking second-to-last, always pick the 'W' letter choice
+ - If you are the other player, always pick the 'L' letter choice
 
-|A|B|Q|
-|-|-|-|
-|L|L|L|
-|L|W|W|
-|W|L|W|
-|W|W|W|
+## Mapping a path to victory
 
-Once again, since we have only two possiblities ('W' and 'L') we can treat this as a binary truth table where 'W' = 1 and 'L' = 0.
+If we are presented with larger strings, each player will want to manipulate the string to find a path to victory.  Let's look at a few examples and see if we can find some patterns.
 
-|A|B|Q|
-|-|-|-|
-|0|0|0|
-|0|1|1|
-|1|0|1|
-|1|1|1|
+For the folowing images, I will show what the string will look like if the left or right character is taken off.  To make the positions of the characters clear, I will substitute letters of the alphabet for each position.  For example, the string 'WLL' would be represented as ABC.  At this point, the values (W or L) aren't important - I just want to look at where the characters land after each operation.
 
-We can see that this table represents an <a href="https://en.wikipedia.org/wiki/OR_gate">OR</A> gate.  Since the player in this position always wants the 'W' we can use an OR statement to determine whether the player in this position will win or lose.
-
-## Showing all possibilities
-For the folowing images, we will show what the string will look like if we take the left or right character off.  To make the positions of the characters clear, we will substitute letters of the alphabet for each position.  For example in the string 'WLL' would be represented as ABC.  Even though each value can only be a 1 (W) or 0 (L) I want to make it clear where each position in the string ends as we make our decisions.
-
-In order to show all of the paths, we will move down a tree of values starting with the full string at the top and remove the left character or the right character as we move down the tree.  Using the same three letter string 'ABC', if we remote the left character as removed the remaining letters are 'BC'.  If we remove the right character the remaining letters are 'AB'.  We can continue this process and create the following tree of all possible paths using this size string:
+In order to show all of the paths, we will move down a tree of values starting with the full string at the top and remove the left character or the right character as we move down the tree.  Using the same three letter string 'ABC', if we remote the left character the remaining characters are 'BC'.  If we remove the right character the remaining characters are 'AB'.  We can continue this process and create the following tree of all possible paths using this size string:
 
 ![tree-3a](https://github.com/user-attachments/assets/ec9b24c1-2e19-4b94-bfc7-4b35b14a9338)
 
@@ -89,18 +80,20 @@ Likewise, we can do the same with a 4 character string:
 
 ![tree-4a](https://github.com/user-attachments/assets/8a6ab197-ad23-49c2-aaed-a328fca7cd0c)
 
-After visualizing this, my first tought was to create a series of nodes and use a recursive formula to plot all possible moves.  The recursive formula would move all the way down the left side of the tree, then work its way back up and fill in the right branches while evaluating a value at each decision point as listed previously.  This would create a linked list that could be traversed to see every possible outcome of the game.  The problem with this solution is that it will take an excemptional amount of computation time for a very large string.  The number of calls to our recursive formula could be represented as the formula 2^(n-1) + 1.  
+After visualizing this, my first tought was to create a series of nodes and use a recursive formula to plot all possible moves in a given string.  The recursive formula would move all the way down the left side of the tree, then work its way back up and fill in the right branches while evaluating a value of 1 or 0 at each decision point as listed previously.  This would create a linked list that could be traversed to see every possible outcome of the game and allow each player to chose the best outcome.  The problem with this solution is that it will take an exceptional amount of computation time as the string size increases.  The number of calls to our recursive formula could be represented as the formula 2^(n-1) + 1.  
 
-This means as we approach a string size of 24, for example, we would require 8,388,609 calls to our recursive function.  The limit at 55 characters would take 18,014,398,510,000,001 calls to our recursive function.  Even if we were to prune our data, there is still a chance that an excessive number of function calls could happen, and I don't want to take the chance that a random string will cause the game to freeze. (On the web page, this results in a PHP timeout error which gives a blank white page)
+This means as we approach a string size of 24, for example, we would require 8,388,609 calls to our recursive function.  The limit at 55 characters would take 18,014,398,510,000,001 calls to our recursive function.  Even if we were to prune our data, there is still a better than zero chance that an excessive number of function calls could happen and cause slow performance or disasterous results.  (For example, in php this could result in a PHP timeout error which gives a blank white page)
 
-However, the theory behind this is sound and it would indeed give the proper result.  We could determine the values of each node dpeending on whether the length is even or odd.  For nodes that have only a single letter, we just reutrn the value of the letter 'W' (1) or 'L' (0).  This would create a tree that can predict which player will win in the end and provide us with the exact path to victory using the following information:
+However, after programming and testing smaller solutions, the theory behind this is sound and did indeed give the proper result.  I was able to determine the values of each node dpeending on whether the length of the string was even or odd.  For nodes that have only a single letter (bottom of the tree), I just reutrned the value of the letter 'W' (1) or 'L' (0).  This created a tree that can predict which player will win in the end and provide the exact path to victory using the following information:
 
 - If the string is even, 1P will pick second-to-last
 - If the string is odd, 2P will pick second-to-last
-- Whomever picks second-to-last will always AND the two choices (shooting for the lowest or minimum value L)
-- The other player will always OR the two choices (shooting for the highest or maximum value W)
+- Whomever picks second-to-last will always pick 'W' (leaving the lowest value) 
+- The other player will always pick 'L' (leaving the highest value)
 
-## Optimizing our Solution
+While this works with smaller strings, it does not work for the overall game.  Time to optimize.
+
+## Trimming the Tree
 
 If we look at our trees again, we can see that once we chose either left or right on the first turn, the center of either choice is exactly the same.  Since they will logically look at the exact same characters of the string, we can significantly trim our tree down in the following manner:
 
@@ -112,12 +105,40 @@ When we continue up to a 4 character tree we see the same happens and the tree c
 
 This has significantly trimmed our tree of nodes down to a very managable size.
 
-Now, one very noticable pattern appears: the final paths always lead to a reversed version of the initial string.
+Now, one very noticable pattern appears; the final paths always lead to a reversed version of the initial string.
 
-We can use this information to create a simple map of all possibilities from the final choice up.
-- We know that the final string will be a reversal of the initial string
-- We know that the player who goes second-to-last always wants to leave an 'L', so we can go through each pair of characters in the string and perform an AND function and put those values into a new string
-- We know that the other player wants to have as many 'W's as possible, so we can go through each pair of the previous string and perform an OR function
+## Player choices along the path
+
+Looking back at the choices between the two players, we can reperesent what each player wants as a simple truth table.
+
+Here is the second-to-last player again, but this time using 'W' = 1 and 'L' = 0:
+ 
+|A|B|Q|
+|-|-|-|
+|0|0|0|
+|0|1|0|
+|1|0|0|
+|1|1|1|
+
+When seen in this manner, the table is the same representation as an <a href="https://en.wikipedia.org/wiki/AND_gate">AND</a> gate.  In fact, we can use a simple AND statement to determine if this position on the tree is good for 1P ('L') or bad ('W').  Since 1P wants to leave an 'L', anything with a 0 is a desired outcome and a path we want to move down.
+
+Recall that the other player will always want to leave 'W' - so they will always take the 'L'.  We can write this as a simple truth table between two choices as well:
+
+|A|B|Q|
+|-|-|-|
+|0|0|0|
+|0|1|1|
+|1|0|1|
+|1|1|1|
+
+We can see that this table represents an <a href="https://en.wikipedia.org/wiki/OR_gate">OR</A> gate.  So in this player's case, we can use a simple OR statement to determine if this position on the tree is good for 2P ('W') or bad ('L').  Since 2P wants to have a 'W', anything with a 1 is a desired outcome and a path we want to move down.
+
+## Putting it all together
+
+We can use the information above to create a simple map of all possible choices; starting with each remaining character:
+- We know that the list of final outcomes will be a reversal of the initial string
+- We know that the player who goes second-to-last always wants to leave an 'L', so on even iterations through a loop we can go through each pair of characters in the string and perform an AND function; storing those values in a new string that will be 1 character less than the initial string. Those characters stored are represented as an 'L' or 'W' where 'L' represents being able to leave an L last and 'W' represents leaving a W.
+- We know that the other player wants to have as many 'W's as possible, so on odd iterations through a loop we can go through each pair of the previous string and perform an OR function; also storing those values in a new string that is 1 character less than the string before.  Just like the other turn, this character represents wehter this path leads to leaving an 'L' or 'W'.
 - We can repeat the previous two steps for however long the string is
 
 Using this formula, the largest string would be 55 characters and we would need to iterate through it 54 times.  Since each time up the tree we lose a character on the string, the total number of iterations would be represented ad n(A1 + An) / 2 meaning at worst case we iterate 1485 times; which is much better than our recursive function!
@@ -128,8 +149,10 @@ So, our process breaks down as this:
 - OR all of the values in the previous string into a new string
 - Repeat the last two steps until we are down to a single character
 
-If that final character is a 'W' and the initial string length is 1, there is no path for 1P to win and 2P will be the winner.  Otherwise 1P will win.
+If that final character is a 'W' and the initial string length is odd, there is no path for 1P to win and 2P will be the winner.  Otherwise 1P will win.
 If that final character is a 'L' and the initial string length is even, there is no path for 2P to win and 1P will be the winner.  Otherwise 2P will win.
+
+## Example Map:
 
 An example string tree where 'L' = 0 and 'W' = 1 might look like this:
 Initial string: WLWLL
@@ -144,9 +167,9 @@ We can see from this process that there is no path to get a 'W' to the final str
 
 ## Best moves turn-by-turn
 
-Our code has been optimized enough that it would be possible to call our function on each choice - left or right - and make a decision based on that outcome.  However, since we already generate the entire decision process on the first string, the information is already present for every move that could be made in the game.
+Our code has been optimized enough that it would be possible to call our function on each choice - left or right - and make a decision based on that outcome.  However, since we already generate the entire decision process on the initial generated string to determine the outcome, the information is already present for every move that could be made in the game.
 
-By simply creating an X and Y value to traverse the array of strings, we can determine a value for each spot and simply check the next two values.  The (Y) Value would represent the current turn from top-to-bottom while the X value represents which branch we are at from left-to-right.
+By simply creating an X and Y value to traverse the array of strings, we can see the  value for each spot and simply check the next two values to determine if the move makes sense for each player.  The (Y) Value would represent the current turn from top-to-bottom while the X value represents which branch we are at from left-to-right.
 Initially, the values are set as follows:
 - Y = string length (4)
 - X = 0
@@ -157,6 +180,10 @@ If we choose right, X increments by 1 and Y decrements
 We can now track who should win for any player at any point of the game and whether they have a path to victory.
 
 For the CPU to make a decision, we simply look at the next string (Y-1) and compare the left (X) and right (X+1) positions.  Depending on if the string is even or odd, we either want the 'L' (0) or 'W' (1).  By tracking the decisions made throguh the game, we can tell which player will win at any point.
+
+
+
+
 
 # To-Do List
 - [x] Fix double-clicks on 1P game
