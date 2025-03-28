@@ -10,7 +10,7 @@
     </head>
     <body background="bg.jpg">
     <div class="flex flex-col border border-black justify-center items-center h-screen w-screen">
-        <div class="flex flex-col justify-center items-center bg-slate-100 border border-slate-600 rounded-2xl min-w-[360px] min-h-[640px] max-w-sm max-h-full">
+        <div class="flex flex-col justify-center items-center bg-slate-100 border border-slate-600 rounded-2xl min-w-[360px] min-h-[640px] max-w-sm max-h-sm">
             {{ $slot }}
         </div>
     </div>
