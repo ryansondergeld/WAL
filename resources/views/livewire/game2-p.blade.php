@@ -1,5 +1,5 @@
-<div class="py-2 px-4 w-[360px] h-[640px]">
-    <div class="flex justify-center items-center w-full h-1/8">
+<div class="main-container">
+    <div class="header-container">
         <H1 class="text-2xl">Winners and Losers</H1>
     </div>
     <div class="flex flex-col justify-center items-center break-all w-full h-3/4">
@@ -20,17 +20,17 @@
             </div>
         @endif
     </div>
-    <div class="flex justify-center items-center w-full h-1/8 ">
+    <div class="control-container">
         @if($state == 0)
-            <div class="flex justify-center w-1/2">
-                <button wire:click="left" class="bg-slate-200 rounded-md border border-slate-300 py-2 px-4 max-h-16">Remove Left</button>
+            <div class="half-button-container">
+                <button wire:click="left" class="half-button">Remove Left</button>
             </div>
-            <div class="flex justify-center w-1/2">
-                <button wire:click="right" class="bg-slate-200 rounded-md border border-slate-300 py-2 px-4 max-h-16">Remove Right</button>
+            <div class="half-button-container>
+                <button wire:click="right" class="half-button">Remove Right</button>
             </div>
         @elseif($state == 1)
-            <div class="flex justify-center w-full">
-                <a href="/" wire:navigate class="bg-slate-200 rounded-md border border-slate-300 py-2 px-4 h-12 w-64 text-center hover:bg-blue-200""><- Back to Home</a>
+            <div class="full-button-container">
+                <a href="/" wire:navigate class="full-button"><- Back to Home</a>
             </div>
         @endif
     </div>

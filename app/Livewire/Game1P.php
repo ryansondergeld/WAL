@@ -19,7 +19,6 @@ class Game1P extends Component
     public string $best = 'Right';
     public string $winner = '1P';
     public array $moves = [];
-    public bool $loaded = false;
 
     /**
      * @throws RandomException
@@ -215,6 +214,7 @@ class Game1P extends Component
         # Update the game
         $this->update_game();
 
+        # Change back to player's turn
         $this->player = 'Player 1';
         $this->stream(to: 'player', content: $this->player, replace: true);
     }

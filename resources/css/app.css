@@ -15,6 +15,18 @@
 
 @layer components
 {
+    .bounds
+    {
+        @apply flex flex-col border border-black justify-center items-center h-screen w-screen
+    }
+    .app-container
+    {
+        @apply flex flex-col justify-center items-center bg-slate-100 border border-slate-600 rounded-2xl w-[360px] h-[640px] max-w-sm max-h-sm
+    }
+    .app-container-test
+    {
+        @apply flex flex-col justify-center items-center bg-slate-100 border border-slate-600 rounded-2xl w-[360px] h-[640px] max-w-sm max-h-sm
+    }
     .test
     {
         @apply bg-slate-100 w-64 h-32
@@ -22,6 +34,54 @@
     .test-button
     {
         @apply bg-blue-200 py-2 px-4 rounded
+    }
+    .full-button
+    {
+        @apply bg-slate-200 rounded-md border border-slate-300 py-2 px-4 h-12 w-64 text-center hover:bg-blue-200
+    }
+    .half-button
+    {
+        @apply bg-slate-200 rounded-md border border-slate-300 py-2 px-4 max-h-16 hover:bg-blue-200
+    }
+    .main-container
+    {
+        @apply py-2 px-4 w-[360px] h-[640px]
+    }
+    .main-container-test
+    {
+        @apply py-2 px-4 min-w-[360px] min-h-[640px]
+    }
+    .header-container
+    {
+        @apply flex justify-center items-center w-full h-1/8
+    }
+    .control-container
+    {
+        @apply flex justify-center items-center w-full h-1/8 py-2
+    }
+    .full-button-container
+    {
+        @apply flex justify-center w-full py-2
+    }
+    .half-button-container
+    {
+        @apply flex justify-center w-1/2 py-2
+    }
+    .basic-input
+    {
+        @apply border border-slate-300 py-2 px-4 h-12 w-64
+    }
+    .error-text
+    {
+        @apply text-sm text-red-500
+    }
+    .mobile-table-body
+    {
+        @apply divide-y divide-gray-200
+    }
+    .mobile-table-row
+    {
+        @apply max-w-xs break-words
     }
 }
 
