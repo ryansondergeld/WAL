@@ -21,11 +21,11 @@
     }
     .app-container
     {
-        @apply flex flex-col justify-center items-center bg-slate-100 border border-slate-600 rounded-2xl w-[360px] h-[640px] max-w-sm max-h-sm
+        @apply flex flex-col justify-center items-center bg-slate-100 border border-slate-600 rounded-2xl w-[360px] h-[640px] max-w-sm
     }
     .app-container-test
     {
-        @apply flex flex-col justify-center items-center bg-slate-100 border border-slate-600 rounded-2xl w-[360px] h-[640px] max-w-sm max-h-sm
+        @apply flex flex-col justify-center items-center bg-slate-100 border border-slate-600 rounded-2xl w-[360px] h-[640px] max-w-sm
     }
     .test
     {
