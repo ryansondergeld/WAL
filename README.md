@@ -174,10 +174,15 @@ Initially, the values are set as follows:
 - Y = string length (4)
 - X = 0
 
-If we choose left, X stays the same and Y decrements
-If we choose right, X increments by 1 and Y decrements
+If we choose left:
+- X stays the same
+-  Y decrements
 
-We can now track who should win for any player at any point of the game and whether they have a path to victory.
+If we choose right: 
+- X increments by 1
+- Y decrements
+
+We can now track who should win for any player at any point of the game and whether they have a path to victory. 
 
 For the CPU to make a decision, we simply look at the next string (Y-1) and compare the left (X) and right (X+1) positions.  Depending on if the string is even or odd, we either want the 'L' (0) or 'W' (1).  By tracking the decisions made throguh the game, we can tell which player will win at any point.
 
