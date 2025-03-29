@@ -59,6 +59,10 @@
     {
         @apply flex justify-center items-center w-full h-1/8 py-2
     }
+    .content-container
+    {
+        @apply flex flex-col justify-center items-center break-all w-full h-3/4
+    }
     .full-button-container
     {
         @apply flex justify-center w-full py-2

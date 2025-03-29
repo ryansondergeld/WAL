@@ -2,7 +2,7 @@
     <div class="header-container">
         <H1 class="text-2xl">Winners and Losers</H1>
     </div>
-    <div class="flex flex-col justify-center items-center break-all w-full h-3/4">
+    <div class="content-container">
         @if($state == 0)
             <div class="flex flex-col justify-center items-center h-1/4">
                 <p class="text-2xl">{{$player}}</p>
@@ -25,7 +25,7 @@
             <div class="half-button-container">
                 <button wire:click="left" class="half-button">Remove Left</button>
             </div>
-            <div class="half-button-container>
+            <div class="half-button-container">
                 <button wire:click="right" class="half-button">Remove Right</button>
             </div>
         @elseif($state == 1)

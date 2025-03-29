@@ -2,7 +2,7 @@
     <div class="header-container">
         <H1 class="text-2xl">Winners and Losers</H1>
     </div>
-    <div class="flex flex-col justify-start items-center break-all w-full min-h-3/4">
+    <div class="content-container">
         <div class="w-full flex flex-col justify-start break-normal min-h-3/4 px-4 py-2">
             <p class="w-full flex justify-center break-normal">Enter a string of 'W' and 'L' below and click Test String to see how the game will play out.</p>
             <p class="error-text">{{$errors}}</p>

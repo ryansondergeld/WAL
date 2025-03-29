@@ -2,7 +2,7 @@
     <div class="header-container">
         <H1 class="text-2xl">Winners and Losers</H1>
     </div>
-    <div class="flex flex-col justify-center items-center break-all w-full h-3/4">
+    <div class="content-container">
         <div class="h-1/8">
             <p>Main Menu:</p>
         </div>

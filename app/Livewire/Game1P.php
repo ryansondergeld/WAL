@@ -19,6 +19,8 @@ class Game1P extends Component
     public string $best = 'Right';
     public string $winner = '1P';
     public array $moves = [];
+    public string $p1 = 'Player';
+    public string $p2 = 'CPU';
 
     /**
      * @throws RandomException
@@ -51,6 +53,8 @@ class Game1P extends Component
         # Flip a random coin to see if the CPU goes first
         if(random_int(0, 1) == 1)
         {
+            $this->p1 = 'CPU';
+            $this->p2 = 'Player';
             $this->player = 'CPU';
             $this->stream(to: 'player', content: $this->player, replace: true);
             $this->CPU_turn();
@@ -66,7 +70,7 @@ class Game1P extends Component
         $r = '';
 
         # Get a random length
-        $l = random_int(5, 55);
+        $l = random_int(3, 5);
 
         # Set the allowable characters
         $c = 'WL';
@@ -92,10 +96,7 @@ class Game1P extends Component
         $this->pick_left();
 
         # If this isn't the last move, CPU's turn
-        if($this->map_level > 0)
-        {
-            # Run CPU
-            $this->CPU_turn();
+        if($this->map_level > 0) { $this->CPU_turn();
         }
 
     }
@@ -118,11 +119,7 @@ class Game1P extends Component
         $this->pick_right();
 
         # If this isn't the last move, CPU's turn
-        if($this->map_level > 0)
-        {
-            # Run CPU
-            $this->CPU_turn();
-        }
+        if($this->map_level > 0) { $this->CPU_turn(); }
 
     }
 
@@ -147,13 +144,13 @@ class Game1P extends Component
         # Updated predicted winner
         $ml = strlen($this->map[0]);
         $mv = $this->map[$this->map_level][$this->map_branch];
-        $this->winner = '1P';
+        $this->winner = $this->p1;
 
         # if Even and W, 2P Wins
-        if($ml % 2 == 0 and $mv == 'W') { $this->winner = '2P';}
+        if($ml % 2 == 0 and $mv == 'W') { $this->winner = $this->p2;}
 
         # If Odd and L, 2P Wins
-        if($ml % 2 != 0 and $mv == 'L') { $this->winner = '2P';}
+        if($ml % 2 != 0 and $mv == 'L') { $this->winner = $this->p2;}
 
         if($this->map_level >0)
         {
@@ -166,14 +163,16 @@ class Game1P extends Component
             # Game is over
             $this->state = 2;
 
-            if($this->board == 'W')
-            {
-                $this->player = $this->player . ' Wins!';
-            }
-            else
-            {
-                $this->player = $this->player . ' Lost!';
-            }
+            # assume 1P is the winner
+            #$this->winner = $this->p1;
+
+            # Condition where 2P is the winner
+            # if($ml % 2 == 0 and $this->board == 'W') { $this->winner = $this->p2;}
+            # if($ml % 2 != 0 and $this->board == 'L') { $this->winner = $this->p2;}
+
+            # Set the player message
+            $this->player = $this->winner . ' Wins!';
+
         }
     }
 
@@ -183,15 +182,15 @@ class Game1P extends Component
         $this->CPU = new CPU($this->board);
 
         # grab the moves
-        $moves = $this->CPU->get_moves();
+        $this->moves = $this->CPU->get_moves();
 
         # Let's use moves to predict the best move / Winner
-        $this->best = $moves[0]->get_action();
+        $this->best = $this->moves[0]->get_action();
     }
 
     public function CPU_turn(): void
     {
-        # Stream the board change
+        # Change player to CPU and Stream the board change
         $this->player = 'CPU';
         $this->best = 'CPU is thinking. . . ';
         $this->stream(to: 'player', content: $this->player, replace: true);
@@ -214,9 +213,12 @@ class Game1P extends Component
         # Update the game
         $this->update_game();
 
-        # Change back to player's turn
-        $this->player = 'Player 1';
-        $this->stream(to: 'player', content: $this->player, replace: true);
+        # Change back to player's turn if the game isn't over
+        if($this->state != 2)
+        {
+            $this->player = 'Player';
+            $this->stream(to: 'player', content: $this->player, replace: true);
+        }
     }
 
     public function best_move($branch, $level) : string
@@ -227,11 +229,14 @@ class Game1P extends Component
         $left = $this->map[$this->map_level-1][$this->map_branch];
         $right = $this->map[$this->map_level-1][$this->map_branch+1];
 
+        $lc = $this->board[0];
+        $rc = $this->board[strlen($this->board)-1];
+
         # Set Left as the default move
         $m = 'Left';
 
         # Conditions where we want right
-        if($this->map_level %2 == 0 and $right == 'W') { $m = 'Right';}
+        if($this->map_level % 2 == 0 and $right == 'W') { $m = 'Right';}
         if($this->map_level % 2 != 0 and $right == 'L') { $m = 'Right';}
 
         # Return our value

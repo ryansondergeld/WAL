@@ -2,22 +2,19 @@
     <div class="header-container">
         <H1 class="text-2xl">Winners and Losers</H1>
     </div>
-    <div class="flex flex-col justify-center items-center break-all w-full h-3/4">
+    <div class="content-container">
         @if($state == 0 or $state == 1)
             <div class="flex flex-col justify-center items-center h-1/4">
                 <p class="text-2xl" wire:stream="player">{{$player}}</p>
             </div>
             <div class="h-3/4">
                 <p class="break-words" wire:stream="board">{{$board}}</p>
-                @foreach($moves as $move)
-                    {{$move->get_action()}}
-                @endforeach
             </div>
             <div>
-                CPU Predicted Winner: {{$winner}}
+                AI Predicted Winner: {{$winner}}
             </div>
             <div wire:stream="best">
-                CPU Recommended move: {{$best}}
+                AI Recommended move: {{$best}}
             </div>
         @elseif($state == 2)
             <div class="flex flex-col justify-center items-center h-1/4">
@@ -38,8 +35,11 @@
                 <button wire:click="right" wire:loading.attr="disabled" wire:target="right, init" class="half-button">Remove Right</button>
             </div>
         @elseif($state == 2)
-            <div class="full-button-container">
-                <a href="/" wire:navigate class="full-button"><- Back to Home</a>
+            <div class="half-button-container">
+                <a href="/" wire:navigate class="half-button"><- Back to Home</a>
+            </div>
+            <div class="half-button-container">
+                <a href="/Game1P" wire:navigate class="half-button">Play Again!</a>
             </div>
         @endif
         <div wire:init="init"></div>
