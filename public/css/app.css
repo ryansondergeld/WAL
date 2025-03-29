@@ -599,14 +599,14 @@
   .h-\[640px\] {
     height: 640px;
   }
-  .h-full {
-    height: 100%;
-  }
-  .h-screen {
-    height: 100vh;
+  .h-fit {
+    height: fit-content;
   }
   .max-h-16 {
     max-height: calc(var(--spacing) * 16);
+  }
+  .min-h-3\/4 {
+    min-height: calc(3/4 * 100%);
   }
   .min-h-\[640px\] {
     min-height: 640px;
@@ -622,6 +622,9 @@
   }
   .w-1\/4 {
     width: calc(1/4 * 100%);
+  }
+  .w-1\/8 {
+    width: calc(1/8 * 100%);
   }
   .w-2 {
     width: calc(var(--spacing) * 2);
@@ -742,15 +745,8 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
-  .border-b {
-    border-bottom-style: var(--tw-border-style);
-    border-bottom-width: 1px;
-  }
   .border-black {
     border-color: var(--color-black);
-  }
-  .border-gray-200 {
-    border-color: var(--color-gray-200);
   }
   .border-gray-300 {
     border-color: var(--color-gray-300);
@@ -766,9 +762,6 @@
   }
   .bg-\[\#FDFDFC\] {
     background-color: #FDFDFC;
-  }
-  .bg-gray-50 {
-    background-color: var(--color-gray-50);
   }
   .bg-slate-100 {
     background-color: var(--color-slate-100);
@@ -905,16 +898,6 @@
     --tw-ease: var(--ease-in-out);
     transition-timing-function: var(--ease-in-out);
   }
-  .odd\:bg-white {
-    &:nth-child(odd) {
-      background-color: var(--color-white);
-    }
-  }
-  .even\:bg-gray-50 {
-    &:nth-child(even) {
-      background-color: var(--color-gray-50);
-    }
-  }
   .hover\:text-gray-400 {
     &:hover {
       @media (hover: hover) {
@@ -1016,19 +999,9 @@
       border-color: var(--color-gray-600);
     }
   }
-  .dark\:border-gray-700 {
-    @media (prefers-color-scheme: dark) {
-      border-color: var(--color-gray-700);
-    }
-  }
   .dark\:bg-\[\#0a0a0a\] {
     @media (prefers-color-scheme: dark) {
       background-color: #0a0a0a;
-    }
-  }
-  .dark\:bg-gray-700 {
-    @media (prefers-color-scheme: dark) {
-      background-color: var(--color-gray-700);
     }
   }
   .dark\:bg-gray-800 {
@@ -1049,20 +1022,6 @@
   .dark\:text-gray-600 {
     @media (prefers-color-scheme: dark) {
       color: var(--color-gray-600);
-    }
-  }
-  .odd\:dark\:bg-gray-900 {
-    &:nth-child(odd) {
-      @media (prefers-color-scheme: dark) {
-        background-color: var(--color-gray-900);
-      }
-    }
-  }
-  .even\:dark\:bg-gray-800 {
-    &:nth-child(even) {
-      @media (prefers-color-scheme: dark) {
-        background-color: var(--color-gray-800);
-      }
     }
   }
   .dark\:hover\:text-gray-300 {
