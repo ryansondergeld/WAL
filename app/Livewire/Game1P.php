@@ -70,7 +70,7 @@ class Game1P extends Component
         $r = '';
 
         # Get a random length
-        $l = random_int(3, 5);
+        $l = random_int(5, 55);
 
         # Set the allowable characters
         $c = 'WL';
