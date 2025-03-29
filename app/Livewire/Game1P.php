@@ -229,11 +229,20 @@ class Game1P extends Component
         $left = $this->map[$this->map_level-1][$this->map_branch];
         $right = $this->map[$this->map_level-1][$this->map_branch+1];
 
+        # Set Left as the default move
+        $m = 'Left';
+
+        # Grab some variables to determine the best move
+        $ml = strlen($this->map[0]);
+        $t = $this->map_level;
         $lc = $this->board[0];
         $rc = $this->board[strlen($this->board)-1];
 
-        # Set Left as the default move
-        $m = 'Left';
+        # When map length and turn are both odd or even, we always want to take Ws
+        if($ml % 2 == $t % 2 and $rc == 'W') { $m = 'Right'; }
+        if($ml % 2 == $t % 2 and $lc == 'W') { $m = 'Left'; }
+        if($ml % 2 != $t % 2 and $rc == 'L') { $m = 'Right'; }
+        if($ml % 2 != $t % 2 and $lc == 'L') { $m = 'Left'; }
 
         # Conditions where we want right
         if($this->map_level % 2 == 0 and $right == 'W') { $m = 'Right';}
